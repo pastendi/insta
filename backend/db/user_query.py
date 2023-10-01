@@ -1,4 +1,5 @@
-from models.User import User, UserReq
+from schemas import UserReq
+from models import User
 from db.hashing import Hash
 from sqlalchemy.orm.session import Session
 
