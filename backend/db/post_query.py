@@ -8,3 +8,5 @@ def createPost(db:Session, req:PostReq):
     db.commit()
     db.refresh(new_post)
     return new_post
+def getAllPosts(db:Session):
+    return db.query(Post).all()

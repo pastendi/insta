@@ -4,6 +4,7 @@ from schemas import PostReq, PostRes
 from sqlalchemy.orm import Session
 from db.database import get_db
 from db import post_query
+from typing import List
 
 
 router = APIRouter(prefix='/post', tags=['post'])
@@ -15,3 +16,7 @@ async def createPost(req:PostReq, db:Session = Depends(get_db)):
     if not req.image_url_type in image_url_types:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Parameter image url type can only be of values 'absolute or relative' ")
     return post_query.createPost(db,req)
+
+@router.get('', response_model=List[PostRes], status_code=status.HTTP_200_OK)
+async def getAllPosts(db:Session = Depends(get_db)):
+    return post_query.getAllPosts(db)
