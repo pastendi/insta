@@ -17,7 +17,7 @@ router = APIRouter(prefix='/post', tags=['post'])
 image_url_types = ['absolute', 'relative']
 
 @router.post('', response_model=PostRes, status_code=status.HTTP_201_CREATED)
-async def createPost(req:PostReq, db:Session = Depends(get_db), user:UserAuth = Depends(get_current_user)):
+async def createPost(req:PostReq, db:Session = Depends(get_db)):
     if not req.image_url_type in image_url_types:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Parameter image url type can only be of values 'absolute or relative' ")
     return post_query.createPost(db,req)
@@ -38,3 +38,7 @@ async def uploadImage(image: UploadFile= File(...),user:UserAuth = Depends(get_c
         shutil.copyfileobj(image.file, buffer)
 
     return {'filename':path}
+
+@router.get('/delete/{id}')
+async def deletePost(id:int, db:Session = Depends(get_db), current_user:UserAuth=Depends(get_current_user)):
+    return post_query.delete(db,id,current_user.id)

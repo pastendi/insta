@@ -1,4 +1,4 @@
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security.oauth2 import OAuth2PasswordBearer
 from typing import Optional
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
