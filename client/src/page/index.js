@@ -1,2 +1,3 @@
-export { default as Feeds } from './Feeds'
-export { default as Layout } from './Layout'
+export { default as Profile } from './Profile'
+export { default as Dashboard } from './Dashboard'
+export { default as Setting } from './Setting'

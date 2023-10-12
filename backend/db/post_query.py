@@ -11,7 +11,7 @@ def createPost(db:Session, req:PostReq):
     db.refresh(new_post)
     return new_post
 def getAllPosts(db:Session):
-    return db.query(Post).all()
+    return db.query(Post).order_by(Post.timestamp.desc()).all()
 
 def delete( db:Session,id:int, user_id:int):
     post = db.query(Post).filter(Post.id == id).first()

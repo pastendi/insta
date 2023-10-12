@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Layout, Feeds } from './page'
+import { Dashboard, Setting, Profile } from './page'
+import Navbar from './components/Navbar'
 function App() {
   return (
     <>
+      <Navbar />
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Feeds />} />
-          </Route>
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/setting' element={<Setting />} />
         </Routes>
       </BrowserRouter>
     </>

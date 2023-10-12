@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from 'react-query'
 import { getPosts } from '../api/postApi'
-import Post from '../components/Post'
+import Post from './Post'
 
 const Feeds = () => {
   const queryClient = useQueryClient()
@@ -20,7 +20,7 @@ const Feeds = () => {
       </div>
     )
   }
-  return <div className='w-full pt-10'>{content}</div>
+  return <div className='w-full'>{content}</div>
 }
 
 export default Feeds
