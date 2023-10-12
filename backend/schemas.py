@@ -41,6 +41,10 @@ class PostReq(BaseModel):
 
 class PostRes(PostReq):
     id:int
+    image_url: str
+    image_url_type: str
+    caption: str
+    user_id:int
     user:UserRes
     timestamp: datetime
     comments: List[CommentRes]
