@@ -1,10 +1,15 @@
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { getPosts } from '../api/postApi'
 import Post from './Post'
+import { queryKeys } from '../constants/queryKeys'
 
 const Feeds = () => {
-  const queryClient = useQueryClient()
-  const { isLoading, isError, error, data: posts } = useQuery('posts', getPosts)
+  const {
+    isLoading,
+    isError,
+    error,
+    data: posts,
+  } = useQuery(queryKeys.post, getPosts)
 
   let content
   if (isLoading) {
