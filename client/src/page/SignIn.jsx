@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
-import { useMutation } from 'react-query'
+import React, { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import { login } from '../api/authApi'
+import { queryKeys } from '../constants/queryKeys'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
+  const navigate = useNavigate()
+
+  const queryClient = useQueryClient()
   const userLogin = useMutation((credential) => login(credential))
 
   const [values, setValues] = useState({
@@ -12,13 +17,19 @@ const SignIn = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
-  const signin = (e) => {
+  const signin = async (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('username', values.username)
     formData.append('password', values.password)
-    userLogin.mutate(formData)
+    try {
+      userLogin.mutate(formData, { onSuccess: () => navigate('/') })
+      // queryClient.setQueryData(queryKeys.user, data)
+    } catch (error) {
+      console.log(error)
+    }
   }
+
   return (
     <div className='w-screen h-screen flex justify-center items-center'>
       <form

@@ -1,7 +1,14 @@
+import { useNavigate } from 'react-router-dom'
 import appLogo from '../assets/logo.svg'
 import { BiSearch } from 'react-icons/bi'
 
 const Navbar = () => {
+  const user = localStorage.getItem('user')
+  const navigate = useNavigate()
+  const signout = () => {
+    localStorage.removeItem('user')
+    navigate('/login')
+  }
   return (
     <div className='fixed top-0 w-full h-16 text-white bg-[#434549]'>
       <div className='relative w-full h-full px-6'>
@@ -17,17 +24,28 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <div className='flex justify-start items-center space-x-2'>
-            <button
-              className='px-3 py-1 rounded-lg border-solid  border-[1px] border-transparent  hover:border-white
+          {user ? (
+            <div>
+              <button
+                className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'
+                onClick={() => signout()}
+              >
+                SignOut
+              </button>
+            </div>
+          ) : (
+            <div className='flex justify-start items-center space-x-2'>
+              <button
+                className='px-3 py-1 rounded-lg border-solid  border-[1px] border-transparent  hover:border-white
             '
-            >
-              SignIn
-            </button>
-            <button className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'>
-              SignUp
-            </button>
-          </div>
+              >
+                SignIn
+              </button>
+              <button className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'>
+                SignUp
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
