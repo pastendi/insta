@@ -38,10 +38,14 @@ const Navbar = () => {
               <button
                 className='px-3 py-1 rounded-lg border-solid  border-[1px] border-transparent  hover:border-white
             '
+                onClick={() => navigate('/login')}
               >
                 SignIn
               </button>
-              <button className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'>
+              <button
+                className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'
+                onClick={() => navigate('/register')}
+              >
                 SignUp
               </button>
             </div>

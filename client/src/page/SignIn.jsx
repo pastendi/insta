@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
-import { login } from '../api/authApi'
-import { queryKeys } from '../constants/queryKeys'
+import { useState } from 'react'
+import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import { useAuth } from '../hooks/useAuth'
 
 const SignIn = () => {
   const navigate = useNavigate()
-
-  const queryClient = useQueryClient()
-  const userLogin = useMutation((credential) => login(credential))
+  const { login } = useAuth()
+  const userLogin = useMutation((credential) => login(credential), {
+    onSuccess: () => {
+      navigate('/')
+    },
+  })
 
   const [values, setValues] = useState({
     username: '',
@@ -17,14 +20,14 @@ const SignIn = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
-  const signin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('username', values.username)
     formData.append('password', values.password)
     try {
-      userLogin.mutate(formData, { onSuccess: () => navigate('/') })
-      // queryClient.setQueryData(queryKeys.user, data)
+      const user = await userLogin.mutateAsync(formData)
+      console.log(user)
     } catch (error) {
       console.log(error)
     }
@@ -32,9 +35,10 @@ const SignIn = () => {
 
   return (
     <div className='w-screen h-screen flex justify-center items-center'>
+      <Navbar />
       <form
         className='w-[600px] min-h-[300px] h-auto  rounded-lg bg-orange-300 py-4 px-8'
-        onSubmit={signin}
+        onSubmit={handleSubmit}
       >
         <h1 className='text-4xl font-bold text-center'>Login Form</h1>
         <div className='flex flex-col space-y-4 mt-10'>

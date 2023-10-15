@@ -1,9 +1,10 @@
 import { useQuery } from 'react-query'
-import { getPosts } from '../api/postApi'
 import Post from './Post'
 import { queryKeys } from '../constants/queryKeys'
+import { usePost } from '../hooks/usePost'
 
 const Feeds = () => {
+  const { getPosts } = usePost()
   const {
     isLoading,
     isError,
