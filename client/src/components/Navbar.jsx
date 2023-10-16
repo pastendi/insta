@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import appLogo from '../assets/logo.svg'
 import { BiSearch } from 'react-icons/bi'
+import { useAuth } from '../hooks/useAuth'
+import { useBearStore } from '../store/store'
 
 const Navbar = () => {
-  const user = localStorage.getItem('user')
+  const { user } = useBearStore()
+  const { logout } = useAuth()
   const navigate = useNavigate()
   const signout = () => {
-    localStorage.removeItem('user')
+    logout()
     navigate('/login')
   }
   return (
@@ -28,7 +31,7 @@ const Navbar = () => {
             <div>
               <button
                 className='px-3 py-1 rounded-lg border-solid border-[1px] border-transparent  hover:border-white'
-                onClick={() => signout()}
+                onClick={signout}
               >
                 SignOut
               </button>

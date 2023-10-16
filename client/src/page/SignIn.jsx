@@ -26,8 +26,7 @@ const SignIn = () => {
     formData.append('username', values.username)
     formData.append('password', values.password)
     try {
-      const user = await userLogin.mutateAsync(formData)
-      console.log(user)
+      await userLogin.mutate(formData)
     } catch (error) {
       console.log(error)
     }

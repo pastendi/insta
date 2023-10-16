@@ -39,7 +39,7 @@ class PostReq(BaseModel):
     caption: str
     user_id:int
 
-class PostRes(PostReq):
+class PostRes(BaseModel):
     id:int
     image_url: str
     image_url_type: str
