@@ -1,10 +1,10 @@
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaPhotoVideo } from 'react-icons/fa'
 
-const AddPhoto = ({ setAddPhoto, onImageChange, image }) => {
+const AddPhoto = ({ setAddPhoto, onImageChange, previewImage }) => {
   return (
     <div className='w-full p-2 shadow-white shadow-sm flex justify-between items-center rounded-lg relative'>
-      {image && (
+      {previewImage && (
         <div className='absolute top-4 left-4 z-20'>
           <div className='flex space-x-2 px-3 p-1 bg-white text-black rounded-lg items-center cursor-pointer relative'>
             <FaPhotoVideo /> <span>Add photos/videos</span>
@@ -24,10 +24,10 @@ const AddPhoto = ({ setAddPhoto, onImageChange, image }) => {
         <AiOutlineClose size={20} />
       </button>
       <div className='w-full h-52 overflow-hidden'>
-        {image ? (
+        {previewImage ? (
           <img
             alt='preview image'
-            src={image}
+            src={previewImage}
             className='w-full h-auto object-contain'
           />
         ) : (

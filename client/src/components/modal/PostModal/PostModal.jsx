@@ -4,14 +4,37 @@ import Avatar from '../../Avatar'
 import { useState } from 'react'
 import AddPostOption from './AddPostOption'
 import AddPhoto from './AddPhoto'
+import { useMutation, useQueryClient } from 'react-query'
+import { usePost } from '../../../hooks/usePost'
+import { queryKeys } from '../../../constants/queryKeys'
 const PostModal = () => {
+  const queryClient = useQueryClient()
+  const { addPost } = usePost()
+  const createPost = useMutation((data) => addPost(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(queryKeys.post)
+      closePostModal()
+    },
+  })
   const { closePostModal, user } = useBearStore()
   const [addPhoto, setAddPhoto] = useState(false)
   const [caption, setCaption] = useState('')
   const [image, setImage] = useState(null)
+  const [previewImage, setPreviewImage] = useState(null)
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]))
+      setImage(e.target.files[0])
+      setPreviewImage(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+  const submitHandler = async () => {
+    const formData = new FormData()
+    formData.append('caption', caption)
+    formData.append('image', image)
+    try {
+      await createPost.mutate(formData)
+    } catch (error) {
+      console.log(error)
     }
   }
   return (
@@ -44,11 +67,14 @@ const PostModal = () => {
             <AddPhoto
               setAddPhoto={setAddPhoto}
               onImageChange={onImageChange}
-              image={image}
+              previewImage={previewImage}
             />
           )}
           <AddPostOption setAddPhoto={setAddPhoto} />
-          <div className='w-full py-2 bg-blue-600 hover:bg-blue-500 font-semibold text-center rounded-lg'>
+          <div
+            className='w-full py-2 bg-blue-600 hover:bg-blue-500 font-semibold text-center rounded-lg'
+            onClick={submitHandler}
+          >
             Post
           </div>
         </div>

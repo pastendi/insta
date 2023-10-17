@@ -12,7 +12,11 @@ const Post = ({ image_url, caption, timestamp, user }) => {
           <p>close</p>
         </div>
       </header>
-      <img src={image_url} alt={caption} className='object-contain' />
+      <img
+        src={image_url}
+        alt={caption}
+        className='w-full aspect-video object-cover'
+      />
       <footer className='p-4'>
         <h1>{caption}</h1>
       </footer>

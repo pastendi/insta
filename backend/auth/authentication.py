@@ -10,11 +10,10 @@ from auth.oAuth2 import create_access_token
 router = APIRouter(tags=['auth'])
 @router.post('/login')
 async def login(req:OAuth2PasswordRequestForm = Depends(), db:Session= Depends(get_db)):
- print(req.username)
  user = db.query(User).filter(User.username == req.username).first()
  if not user or  not Hash.verify(req.password,user.password):
   raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Invalid credentials')
- access_token = create_access_token(data={'username':user.username})
+ access_token = create_access_token(data={'id':user.id,'username':user.username})
  return{
   "access_token":access_token,
   'user_id':user.id,
