@@ -32,7 +32,7 @@ async def createPost(
     with open(path, 'w+b') as buffer:
         shutil.copyfileobj(image.file, buffer)
 
-    image_url = await uploadToCloudinary(imagePath=path,filename=image.filename)
+    image_url = await uploadToCloudinary(imagePath=path,filename=filename)
     req_dict = {'image_url':image_url,'caption':caption,'user_id':user.id}
     return post_query.createPost(db,req=PostReq(**req_dict))
 
