@@ -6,7 +6,7 @@ import { useBearStore } from '../store/store'
 const CreatePostOption = () => {
   const { openPostModal, user } = useBearStore()
   return (
-    <div className='w-full rounded-2xl bg-[#434549] p-4 my-4'>
+    <div className='w-full rounded-2xl bg-[#434549] p-4 mb-4'>
       <div className='flex space-x-2 pb-3 border-b-2  border-b-[#585b61]'>
         <Avatar />
         <div

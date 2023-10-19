@@ -1,11 +1,8 @@
-import { queryKeys } from '../constants/queryKeys'
 import { useBearStore } from '../store/store'
 import { axiosInstance } from './axiosInstance'
-import { useQueryClient } from 'react-query'
 
 export const useAuth = () => {
   const { setUser } = useBearStore()
-  const queryClient = useQueryClient()
   const login = async (data) => {
     const res = await axiosInstance.post('/login', data, {
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -22,7 +19,7 @@ export const useAuth = () => {
   }
   const logout = async () => {
     localStorage.removeItem('user')
-    queryClient.removeQueries()
+    setUser(null)
   }
   return { login, register, logout }
 }

@@ -5,6 +5,7 @@ import hahaIcon from './haha.svg'
 import sadIcon from './sad.svg'
 import wowIcon from './wow.svg'
 import angryIcon from './angry.svg'
+import appLogo from './logo.svg'
 
 export {
   thumbsUpIcon,
@@ -14,4 +15,5 @@ export {
   sadIcon,
   wowIcon,
   angryIcon,
+  appLogo,
 }

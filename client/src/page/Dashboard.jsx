@@ -6,9 +6,9 @@ const Dashboard = () => {
   const { user } = useBearStore()
   return (
     <div className='w-full mx-auto bg-bgColor text-white'>
-      <div className='w-full min-h-screen flex flex-row'>
+      <div className='w-full min-h-screen flex flex-row justify-between'>
         <div className='w-80 pt-20'>User Options</div>
-        <div className='flex-1 px-36 pt-20'>
+        <div className='pt-20 w-[600px]'>
           {user && <CreatePostOption />}
           <Feeds />
         </div>
