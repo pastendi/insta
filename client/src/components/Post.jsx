@@ -1,6 +1,7 @@
 import Avatar from './Avatar'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BiLike, BiComment, BiShare } from 'react-icons/bi'
+import { formatDistanceToNowStrict } from 'date-fns'
 import {
   thumbsUpIcon,
   loveIcon,
@@ -11,13 +12,17 @@ import {
   angryIcon,
 } from '../assets'
 const Post = ({ image_url, caption, timestamp, user }) => {
+  const timeframe = formatDistanceToNowStrict(new Date(timestamp))
   return (
     <div className='w-full rounded-2xl bg-[#434549]'>
       <header className='p-4 space-y-4'>
         <div className='flex flex-row justify-between items-center'>
           <div className='flex space-x-2 items-center'>
             <Avatar />
-            <p className='text-lg'>{user?.username}</p>
+            <div>
+              <p className='text-lg'>{user?.username}</p>
+              <p className='text-sm'>{`${timeframe} ago`}</p>
+            </div>
           </div>
           <AiOutlineClose size={24} className='cursor-pointer' />
         </div>

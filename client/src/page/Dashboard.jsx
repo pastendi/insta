@@ -1,5 +1,7 @@
 import CreatePostOption from '../components/CreatePostOption'
 import Feeds from '../components/Feeds'
+import LeftHome from '../components/LeftHome/LeftHome'
+import RightHome from '../components/RightHome/RightHome'
 import { useBearStore } from '../store/store'
 
 const Dashboard = () => {
@@ -7,12 +9,12 @@ const Dashboard = () => {
   return (
     <div className='w-full mx-auto bg-bgColor text-white'>
       <div className='w-full min-h-screen flex flex-row justify-between'>
-        <div className='w-80 pt-20'>User Options</div>
+        <LeftHome />
         <div className='pt-20 w-[600px]'>
           {user && <CreatePostOption />}
           <Feeds />
         </div>
-        <div className='w-80 pt-20'>Contacts/followers</div>
+        <RightHome />
       </div>
     </div>
   )
