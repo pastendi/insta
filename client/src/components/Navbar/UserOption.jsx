@@ -15,7 +15,7 @@ const UserOption = () => {
     navigate('/login')
   }
   return (
-    <div className='absolute top-12 right-0 w-96 h-min bg-[#434549] shadow-sm shadow-gray-400 z-40 rounded-lg p-2 font-semibold'>
+    <div className='absolute top-12 right-0 w-96 h-min bg-[#434549] shadow-sm shadow-gray-400 rounded-lg p-2 font-semibold z-50'>
       <div className='p-2 rounded-lg shadow-lg shadow-gray-800'>
         <div className='flex  items-center space-x-2 p-2 rounded-lg hover:bg-[#54575d] cursor-pointer'>
           <Avatar />
